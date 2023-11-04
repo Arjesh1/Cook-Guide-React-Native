@@ -10,7 +10,7 @@ const MealsOverviewScreen = ({route}) => {
 
   const renderMealItem = (itemData) => {
     return(
-      <MealItem title={itemData.item.title}/>
+      <MealItem item={itemData.item} />
     )
   }
 
