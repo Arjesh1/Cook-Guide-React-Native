@@ -8,7 +8,7 @@ const MealItem = ({item}) => {
   const navigation = useNavigation()
   const handleOnMealSelected = (item) => {
     navigation.navigate('MealDetail', {
-        mealId: item.id
+        meal: item
     })
 }
   return (
