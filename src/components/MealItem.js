@@ -1,12 +1,19 @@
 import { Platform } from "react-native"
 import { Image } from "react-native"
 import { View,Pressable, Text, StyleSheet } from "react-native"
+import {useNavigation} from '@react-navigation/native'
 
 
 const MealItem = ({item}) => {
+  const navigation = useNavigation()
+  const handleOnMealSelected = (item) => {
+    navigation.navigate('MealDetail', {
+        mealId: item.id
+    })
+}
   return (
     <View style={styles.mealItem}>
-        <Pressable style={{ borderRadius: 8, overflow: 'hidden'}} android_ripple={{color: '#ccc'}}>
+        <Pressable style={{ borderRadius: 8, overflow: 'hidden'}} android_ripple={{color: '#ccc'}} onPress={() => handleOnMealSelected(item)}>
             <View>
                 <Image source={{uri:item.imageUrl}} style={styles.image} resizeMode="stretch"/>
                 <Text style={styles.title}>{item.title}</Text>

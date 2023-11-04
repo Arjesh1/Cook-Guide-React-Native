@@ -16,6 +16,8 @@ const MealsOverviewScreen = ({route, navigation}) => {
     title: categoryTitle
   })
   }, [catId, navigation])
+
+  
  
 
   const renderMealItem = (itemData) => {
