@@ -2,11 +2,17 @@ import { View, FlatList, StyleSheet } from 'react-native'
 import {CATEGORIES} from '../../data/dummyData'
 import CategoryGridTile from '../components/CategoryGridTile'
 
-const renderCategoryItem = (itemData)=> {
-    return <CategoryGridTile title={itemData.item.title} color={itemData.item.color}/>
-}
 
-const CategoriesScreen = () => {
+
+const CategoriesScreen = ({navigation}) => {
+  const renderCategoryItem = (itemData)=> {
+
+  const handleOnPress =() =>{
+    navigation.navigate('MealsOverview')
+
+  }
+    return <CategoryGridTile title={itemData.item.title} color={itemData.item.color} onPress={handleOnPress}/>
+}
     
   return (
     <View style={styles.mainContainer}>
