@@ -6,7 +6,7 @@ import { View,Pressable, Text, StyleSheet } from "react-native"
 const MealItem = ({item}) => {
   return (
     <View style={styles.mealItem}>
-        <Pressable style={{ borderRadius: 8, overflow: 'hidden'}}>
+        <Pressable style={{ borderRadius: 8, overflow: 'hidden'}} android_ripple={{color: '#ccc'}}>
             <View>
                 <Image source={{uri:item.imageUrl}} style={styles.image} resizeMode="stretch"/>
                 <Text style={styles.title}>{item.title}</Text>
