@@ -12,6 +12,12 @@ const MealDetailScreen = ({route}) => {
          <Text style={styles.detailItem}>{meal.complexity.toUpperCase()}</Text>
          <Text style={styles.detailItem}>{meal.affordability.toUpperCase()}</Text>
       </View>
+      <Text style={styles.ingredientTitle}>Ingredients</Text>
+      <View  style={styles.ingredientContainer}>
+      {meal.ingredients.map((ingredient, i) =>(
+        <Text key={ingredient} style={styles.ingredientText}>{i+1}.{ingredient}</Text>
+      ))}
+      </View>
     </View>
   )
 }
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
   title: {
         fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 22,
         padding: 8
   },
   details:{
@@ -44,6 +50,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     color: 'white',
+  },
+  ingredientTitle:{
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 8,
+   
+
+  },
+  ingredientContainer:{
+    borderTopWidth: 2,
+    alignItems:'center',
+  },
+  ingredientText:{
+    fontSize: 15,
+    textAlign: 'right'
   },
 
 })
