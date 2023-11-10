@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
 
 const MealDetailScreen = ({route}) => {
   const meal = route.params.meal
+
   return (
+     <ScrollView>
     <View style={styles.container}>
       <Image source={{uri:meal.imageUrl}} style={styles.image} resizeMode="stretch"/>
       <Text style={styles.title}>{meal.title}</Text>
@@ -12,20 +14,32 @@ const MealDetailScreen = ({route}) => {
          <Text style={styles.detailItem}>{meal.complexity.toUpperCase()}</Text>
          <Text style={styles.detailItem}>{meal.affordability.toUpperCase()}</Text>
       </View>
+     
       <Text style={styles.ingredientTitle}>Ingredients</Text>
       <View  style={styles.ingredientContainer}>
       {meal.ingredients.map((ingredient, i) =>(
-        <Text key={ingredient} style={styles.ingredientText}>{i+1}.{ingredient}</Text>
+        <View key={ingredient} style={styles.listContainer}>
+           <Text  style={styles.ingredientText}><Text style={styles.numbering}>{i+1}.</Text> {ingredient}</Text>
+        </View>
+      ))}
+      </View>
+      <Text style={styles.ingredientTitle}>Steps</Text>
+      <View  style={styles.ingredientContainer}>
+      {meal.steps.map((step, i) =>(
+        <View key={step} style={styles.listContainer}>
+           <Text  style={styles.ingredientText}><Text style={styles.numbering}>{i+1}.</Text> {step}</Text>
+        </View>
       ))}
       </View>
     </View>
+    </ScrollView>
   )
 }
 
 export default MealDetailScreen
 const styles = StyleSheet.create({
   container:{
-    padding: 10
+    padding: 10,
   },
   image: {
         width: "100%",
@@ -56,16 +70,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     padding: 8,
-   
-
   },
   ingredientContainer:{
     borderTopWidth: 2,
-    alignItems:'center',
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    gap:4,
+    
+  },
+  listContainer:{
+    backgroundColor: '#E2AB1D',
+    paddingVertical: 3,
+    paddingHorizontal: '10%',
+    borderRadius: 10
+    
+  },
+  numbering:{
+    fontWeight: 'bold',
+    fontSize: 17,
   },
   ingredientText:{
     fontSize: 15,
-    textAlign: 'right'
+    marginVertical: 2,
   },
 
 })
