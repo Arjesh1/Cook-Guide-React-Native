@@ -1,8 +1,22 @@
-import React from 'react'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import React, { useLayoutEffect } from 'react'
+import { View, Text, Image, StyleSheet, ScrollView, Button } from 'react-native'
+import IconButton from '../components/IconButton'
 
-const MealDetailScreen = ({route}) => {
+const MealDetailScreen = ({route, navigation}) => {
   const meal = route.params.meal
+  const handleOnHeaderButtonPressed =() =>{
+    navigation.navigate('MealsCategories')
+  }
+
+  useLayoutEffect(()=>{
+    navigation.setOptions({
+      headerRight :() =>{
+        return <IconButton onPress={handleOnHeaderButtonPressed}/>
+      }
+    })
+
+
+  }, [])
 
   return (
      <ScrollView>
