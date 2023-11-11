@@ -2,10 +2,10 @@ import { Pressable } from "react-native"
 import { Entypo } from '@expo/vector-icons';
 
 
-const IconButton = ({onPress}) => {
+const IconButton = ({onPress, name}) => {
   return (
     <Pressable onPress={onPress}>
-        <Entypo name="home" size={24} color="white" />
+        <Entypo name={name} size={24} color="white" />
     </Pressable>
   )
 }

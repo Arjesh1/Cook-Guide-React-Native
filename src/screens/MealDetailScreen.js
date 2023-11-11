@@ -4,14 +4,20 @@ import IconButton from '../components/IconButton'
 
 const MealDetailScreen = ({route, navigation}) => {
   const meal = route.params.meal
-  const handleOnHeaderButtonPressed =() =>{
+  const handleOnHeaderHomePressed =() =>{
     navigation.navigate('MealsCategories')
+  }
+  const handleOnHeaderHeartPressed =() =>{
+    console.log("handleOnHeaderHeartPressed")
   }
 
   useLayoutEffect(()=>{
     navigation.setOptions({
       headerRight :() =>{
-        return <IconButton onPress={handleOnHeaderButtonPressed}/>
+        return <View style={{flexDirection: 'row', gap: 10}}>
+          <IconButton onPress={handleOnHeaderHeartPressed} name='heart'/>
+          <IconButton onPress={handleOnHeaderHomePressed} name='home'/>
+          </View>
       }
     })
 
