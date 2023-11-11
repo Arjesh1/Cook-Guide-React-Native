@@ -8,6 +8,7 @@ import MealDetailScreen from './src/screens/MealDetailScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavouritesScreen from './src/screens/FavouritesScreen';
 import { Entypo } from '@expo/vector-icons';
+import FavouriteContextProvider from './store/context/favourites_context';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
@@ -32,6 +33,7 @@ export default function App() {
   return (
     <>
     <StatusBar style='light'/>
+    <FavouriteContextProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName='MealsCategories' 
       screenOptions={{  
@@ -65,6 +67,7 @@ export default function App() {
          }}/>
       </Stack.Navigator>
     </NavigationContainer>
+    </FavouriteContextProvider>
     
     </>
     

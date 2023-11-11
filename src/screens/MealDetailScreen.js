@@ -1,25 +1,37 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView, Button } from 'react-native'
 import IconButton from '../components/IconButton'
+import { FavouriteContext } from '../../store/context/favourites_context';
 
 const MealDetailScreen = ({route, navigation}) => {
+  const [isFavourite, setIsFavourite] = useState(true)
+  const favouriteMealContext = useContext(FavouriteContext);
   const meal = route.params.meal
+  useEffect(()=>{
+    setIsFavourite(favouriteMealContext.ids.includes(meal.id))
+  }, [favouriteMealContext, meal.id])
+  console.log(isFavourite)
+
   const handleOnHeaderHomePressed =() =>{
     navigation.navigate('MealsCategories')
   }
   const handleOnHeaderHeartPressed =() =>{
-    console.log("handleOnHeaderHeartPressed")
+   if(isFavourite){
+    favouriteMealContext.removeFavourite(meal.id)
+   } else {
+    favouriteMealContext.addFavourite(meal.id)
+   }
   }
 
   useLayoutEffect(()=>{
     navigation.setOptions({
       headerRight :() =>{
-        return <View style={{flexDirection: 'row', gap: 10}}>
-          <IconButton onPress={handleOnHeaderHeartPressed} name='heart'/>
+        return <View style={{flexDirection: 'row', gap: '20%', alignItems: 'center'}}>
+          <IconButton onPress={handleOnHeaderHeartPressed} name={isFavourite? 'heart' : 'heart-outlined' }/>
           <IconButton onPress={handleOnHeaderHomePressed} name='home'/>
           </View>
       }
-    })
+    }, [navigation, handleOnHeaderHeartPressed, handleOnHeaderHomePressed, isFavourite])
 
 
   }, [])
