@@ -4,18 +4,17 @@ import IconButton from '../components/IconButton'
 import { FavouriteContext } from '../../store/context/favourites_context';
 
 const MealDetailScreen = ({route, navigation}) => {
-  const [isFavourite, setIsFavourite] = useState(true)
+  const [isFavourite, setIsFavourite] = useState()
   const favouriteMealContext = useContext(FavouriteContext);
   const meal = route.params.meal
   useEffect(()=>{
     setIsFavourite(favouriteMealContext.ids.includes(meal.id))
   }, [favouriteMealContext, meal.id])
-  console.log(isFavourite)
 
   const handleOnHeaderHomePressed =() =>{
     navigation.navigate('MealsCategories')
   }
-  const handleOnHeaderHeartPressed =() =>{
+  const handleOnHeaderHeartPressed = () =>{
    if(isFavourite){
     favouriteMealContext.removeFavourite(meal.id)
    } else {
@@ -31,10 +30,8 @@ const MealDetailScreen = ({route, navigation}) => {
           <IconButton onPress={handleOnHeaderHomePressed} name='home'/>
           </View>
       }
-    }, [navigation, handleOnHeaderHeartPressed, handleOnHeaderHomePressed, isFavourite])
-
-
-  }, [])
+    })
+  }, [navigation, handleOnHeaderHeartPressed, handleOnHeaderHomePressed, isFavourite])
 
   return (
      <ScrollView>
