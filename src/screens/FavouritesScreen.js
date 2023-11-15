@@ -1,29 +1,32 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { FavouriteContext } from '../../store/context/favourites_context';
 import { MEALS } from '../../data/dummyData';
+import MealItem from '../components/MealItem';
 
 const FavouritesScreen = () => {
     const favouriteMealContext = useContext(FavouriteContext);
-    const [selectedFavourite, setSelectedFavourite] = useState([])
-
-    useEffect(()=>{
-      favouriteMealContext.ids.map((item) => {
-      const faviouriteMealObj = MEALS.filter((meal)=> meal.id === item )
-      setSelectedFavourite((prev) => [...prev, ...faviouriteMealObj])
-    })
-    }, [])
-
-    console.log(selectedFavourite)
+    const faviouriteMealObj = MEALS.filter((meal)=> favouriteMealContext.ids.includes(meal.id))
+    const renderMealItem = (itemData) => {
+      return(
+        <MealItem item={itemData.item} />
+      )
+    }
 
   return (
-    <View>
-        <Text>
-            FavouritesScreen 
-        </Text>
-      
+    <View style={styles.container}>
+      <FlatList data={faviouriteMealObj} keyExtractor={(item) => item.id} renderItem={renderMealItem}/>
     </View>
   )
 }
 
 export default FavouritesScreen
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 16    
+    }
+})
+
+
