@@ -10,17 +10,12 @@ const FavouritesScreen = () => {
     useEffect(()=>{
       favouriteMealContext.ids.map((item) => {
       const faviouriteMealObj = MEALS.filter((meal)=> meal.id === item )
-      setSelectedFavourite((prev) => [...prev, faviouriteMealObj])
+      setSelectedFavourite((prev) => [...prev, ...faviouriteMealObj])
     })
     }, [])
 
     console.log(selectedFavourite)
 
-    
-
-    
-
-    
   return (
     <View>
         <Text>
