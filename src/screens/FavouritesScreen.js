@@ -13,6 +13,10 @@ const FavouritesScreen = () => {
       )
     }
 
+    if(faviouriteMealObj.length === 0){
+      return <View style={styles.container}><Text style={styles.msgText}>No favourites added!</Text></View>
+    }
+
   return (
     <View style={styles.container}>
       <FlatList data={faviouriteMealObj} keyExtractor={(item) => item.id} renderItem={renderMealItem}/>
@@ -26,6 +30,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16    
+    },
+    msgText: {
+      textAlign: 'center',
+      fontSize: 20
     }
 })
 
